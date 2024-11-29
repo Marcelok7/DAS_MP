@@ -1,7 +1,7 @@
 package Utils;
 
 public class DescriptografarCifraDeCesar {
-    // Função para descriptografar uma mensagem usando a cifra de César com deslocamento 'deslocamento'
+
     public static String descriptografar(String texto, int deslocamento) {
         StringBuilder textoDescriptografado = new StringBuilder();
 
@@ -14,7 +14,7 @@ public class DescriptografarCifraDeCesar {
                 char novaLetra = (char) (((c - 'A' - deslocamento + 26) % 26) + 'A');
                 textoDescriptografado.append(novaLetra);
             } else {
-                // Caso o caractere não esteja no alfabeto (caso de caracteres extras)
+                // Caso o caractere não esteja no alfabeto
                 textoDescriptografado.append(c);
             }
         }

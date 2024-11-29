@@ -43,7 +43,7 @@ public class ViewDecriptComSalt {
 
         // Configuração do JButton (botão para voltar ao menu)
         backButton = new JButton("Voltar para o Menu");
-        backButton.setBounds(20, 670, 150, 30);
+        backButton.setBounds(20, 670, 200, 30);
         backButton.setFont(new Font("Arial", Font.BOLD, 14)); // Fonte do botão
         backButton.setBackground(new Color(255, 99, 71)); // Cor de fundo do botão
         backButton.setFocusPainted(false); // Remove o foco do botão
@@ -58,15 +58,13 @@ public class ViewDecriptComSalt {
         textArea1.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Borda do JTextArea
         panel.add(textArea1);
 
-        // ActionListener para o botão de descriptografar
+
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Obtém o texto do campo de texto
                 String mensagemCifrada = textField1.getText().toUpperCase();
                 List<String> resultados = desencriptarMensagem(mensagemCifrada);
 
-                // Exibe os resultados na JTextArea
                 StringBuilder resultadoText = new StringBuilder();
                 for (String resultado : resultados) {
                     resultadoText.append(resultado).append("\n");
@@ -75,22 +73,20 @@ public class ViewDecriptComSalt {
             }
         });
 
-        // ActionListener para o botão de voltar ao menu
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para voltar ao menu
-                frame.dispose(); // Fecha a janela atual
+                frame.dispose();
                 new Menu();
             }
         });
 
-        // Adiciona o painel ao frame e torna o frame visível
+
         frame.add(panel);
         frame.setVisible(true);
     }
 
-    // Método para tentar todas as combinações de salt e chave
     public static List<String> desencriptarMensagem(String mensagemCifrada) {
         List<String> resultados = new ArrayList<>();
 

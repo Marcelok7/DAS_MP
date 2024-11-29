@@ -5,17 +5,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static Utils.DescriptografarCifraDeCesar.descriptografar;
-
-public class ViewDecript {
+public class ViewDecriptComSaltPepper {
     private JTextField textField1;
     private JButton button1;
-    private JButton backButton; // Botão para voltar ao menu
+    private JButton backButton;
     private JTextArea textArea1;
 
-    public ViewDecript() {
+    public ViewDecriptComSaltPepper() {
         // Configuração do JFrame
-        JFrame frame = new JFrame("Desincriptar o amigo César");
+        JFrame frame = new JFrame("Desincriptar Salt e Pepper");
         frame.setSize(550, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -56,25 +54,13 @@ public class ViewDecript {
         textArea1.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Borda do JTextArea
         panel.add(textArea1);
 
-
+        // Ação para o botão "Desincriptar Salt e Pepper"
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String textoCifrado = textField1.getText().toUpperCase();
-                StringBuilder resultado = new StringBuilder();
-
-                // Verifica se o campo de texto está vazio
-                if (textoCifrado.isEmpty()) {
-                    resultado.append("Insira um texto para cifrar.");
-                } else {
-                    // Tenta todas as chaves de 1 a 25
-                    for (int i = 1; i <= 25; i++) {
-                        String textoDescriptografado = descriptografar(textoCifrado, i);
-                        resultado.append("Deslocamento ").append(i).append(": ").append(textoDescriptografado).append("\n");
-                    }
-                }
-
-                textArea1.setText(resultado.toString());
+                String inputText = textField1.getText();
+                String result = descriptografarSaltPepper(inputText);
+                textArea1.setText(result);
             }
         });
 
@@ -82,14 +68,20 @@ public class ViewDecript {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 frame.dispose();
                 new Menu();
             }
         });
 
+        frame.add(panel, BorderLayout.CENTER);
 
-        frame.add(panel);
         frame.setVisible(true);
+    }
+
+
+    private String descriptografarSaltPepper(String text) {
+        // Aqui você implementaria a lógica de descriptografia do "Salt e Pepper"
+        // Este é um exemplo fictício de como a lógica poderia ser aplicada
+        return "Texto descriptografado com Salt e Pepper: " + text;
     }
 }
