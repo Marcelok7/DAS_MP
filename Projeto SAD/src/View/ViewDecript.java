@@ -1,17 +1,17 @@
 package View;
 
+import Utils.TheMasterDecryptor;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static Utils.DescriptografarCifraDeCesar.descriptografar;
 
 public class ViewDecript {
     private JTextField textField1;
     private JButton button1;
     private JButton backButton; // Botão para voltar ao menu
     private JTextArea textArea1;
+    private TheMasterDecryptor theMasterDecryptor = new TheMasterDecryptor();
 
     public ViewDecript() {
         // Configuração do JFrame
@@ -69,7 +69,7 @@ public class ViewDecript {
                 } else {
                     // Tenta todas as chaves de 1 a 25
                     for (int i = 1; i <= 25; i++) {
-                        String textoDescriptografado = descriptografar(textoCifrado, i);
+                        String textoDescriptografado = theMasterDecryptor.descriptografarCifraCesar(textoCifrado, i);
                         resultado.append("Deslocamento ").append(i).append(": ").append(textoDescriptografado).append("\n");
                     }
                 }

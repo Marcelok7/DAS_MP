@@ -1,9 +1,12 @@
 package View;
 
+import Utils.TheMasterDecryptor;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class ViewDecriptComSaltPepper {
     private JTextField textField1;
@@ -58,13 +61,24 @@ public class ViewDecriptComSaltPepper {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String inputText = textField1.getText();
-                String result = descriptografarSaltPepper(inputText);
-                textArea1.setText(result);
+                // Capturar o texto inserido no JTextField
+                String inputText = textField1.getText().toUpperCase();
+
+                // Usar a classe TheMasterDecryptor para descriptografar
+                List<String> resultados = TheMasterDecryptor.desencriptarMensagem(inputText);
+
+                // Construir o texto para exibição no JTextArea
+                StringBuilder resultadoTexto = new StringBuilder();
+                for (String resultado : resultados) {
+                    resultadoTexto.append(resultado).append("\n");
+                }
+
+                // Exibir os resultados no JTextArea
+                textArea1.setText(resultadoTexto.toString());
             }
         });
 
-
+        // Ação para o botão "Voltar para o Menu"
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,15 +87,8 @@ public class ViewDecriptComSaltPepper {
             }
         });
 
+        // Adicionar o painel ao frame
         frame.add(panel, BorderLayout.CENTER);
-
         frame.setVisible(true);
-    }
-
-
-    private String descriptografarSaltPepper(String text) {
-        // Aqui você implementaria a lógica de descriptografia do "Salt e Pepper"
-        // Este é um exemplo fictício de como a lógica poderia ser aplicada
-        return "Texto descriptografado com Salt e Pepper: " + text;
     }
 }

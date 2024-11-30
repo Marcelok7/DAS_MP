@@ -1,19 +1,19 @@
 package View;
 
+import Utils.TheMasterDecryptor;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
-
-import static Utils.DescriptografarCifraDeCesar.descriptografar;
 
 public class ViewDecriptComSalt {
     private JTextField textField1;
     private JButton button1;
     private JButton backButton;
     private JTextArea textArea1;
+    private TheMasterDecryptor theMasterDecryptor = new TheMasterDecryptor();
 
     public ViewDecriptComSalt() {
         // Configuração do JFrame
@@ -63,7 +63,7 @@ public class ViewDecriptComSalt {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String mensagemCifrada = textField1.getText().toUpperCase();
-                List<String> resultados = desencriptarMensagem(mensagemCifrada);
+                List<String> resultados = TheMasterDecryptor.desencriptarSalt(mensagemCifrada);
 
                 StringBuilder resultadoText = new StringBuilder();
                 for (String resultado : resultados) {
@@ -85,28 +85,5 @@ public class ViewDecriptComSalt {
 
         frame.add(panel);
         frame.setVisible(true);
-    }
-
-    public static List<String> desencriptarMensagem(String mensagemCifrada) {
-        List<String> resultados = new ArrayList<>();
-
-        for (int chave = 1; chave <= 25; chave++) {
-            String textoDescriptografado = descriptografar(mensagemCifrada, chave);
-
-            // Testa se o Salt está no início
-            if (textoDescriptografado.length() > 3) {
-                String possivelSaltInicio = textoDescriptografado.substring(0, 3);
-                String mensagemSemSaltInicio = textoDescriptografado.substring(3);
-                resultados.add("Chave: " + chave + ", Salt (início): " + possivelSaltInicio + ", Mensagem: " + mensagemSemSaltInicio);
-            }
-
-            // Testa se o Salt está no final
-            if (textoDescriptografado.length() > 3) {
-                String possivelSaltFim = textoDescriptografado.substring(textoDescriptografado.length() - 3);
-                String mensagemSemSaltFim = textoDescriptografado.substring(0, textoDescriptografado.length() - 3);
-                resultados.add("Chave: " + chave + ", Salt (final): " + possivelSaltFim + ", Mensagem: " + mensagemSemSaltFim);
-            }
-        }
-        return resultados;
     }
 }
