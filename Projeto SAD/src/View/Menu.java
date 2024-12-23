@@ -8,8 +8,11 @@ import java.awt.event.ActionListener;
 public class Menu {
 
     private JButton desincriptarCesar;
-    private JButton desincriptarSalt;
-    private JButton desincriptarSaltPepper;
+    private JButton desincriptarSaltSp1Ex2;
+    private JButton desincriptarCOCSalt;
+    private JButton desincriptarSaltSp2Ex1;
+    private JButton desincriptarPepperSp2Ex1;
+    private JButton desincriptarAlfaSubsSp2Ex1;
 
     private JPanel panel;
 
@@ -24,50 +27,99 @@ public class Menu {
         panel.setLayout(new GridLayout(3, 1, 10, 10)); // Mudado para 3 linhas
         panel.setBorder(BorderFactory.createTitledBorder("Escolha a Descriptografia"));
 
-        desincriptarCesar = new JButton("Desincriptar Cifra de César");
+        desincriptarCesar = new JButton("Sprint 1 - EX 1 - Desincriptar Apenas Cifra De César");
         desincriptarCesar.setFont(new Font("Arial", Font.BOLD, 16));
         desincriptarCesar.setBackground(new Color(135, 206, 250));
         desincriptarCesar.setFocusPainted(false);
-        desincriptarCesar.setIcon(new ImageIcon("path/to/cesar_icon.png"));
+        //desincriptarCesar.setIcon(new ImageIcon("path/to/cesar_icon.png"));
         desincriptarCesar.setHorizontalTextPosition(SwingConstants.RIGHT);
         panel.add(desincriptarCesar);
 
-        desincriptarSalt = new JButton("Desincriptar Salt");
-        desincriptarSalt.setFont(new Font("Arial", Font.BOLD, 16));
-        desincriptarSalt.setBackground(new Color(135, 206, 250));
-        desincriptarSalt.setFocusPainted(false);
-        desincriptarSalt.setIcon(new ImageIcon("path/to/salt_icon.png"));
-        desincriptarSalt.setHorizontalTextPosition(SwingConstants.RIGHT);
-        panel.add(desincriptarSalt);
+        desincriptarSaltSp1Ex2 = new JButton("Sprint 1 - EX 2 - Desincriptar Apenas Salt");
+        desincriptarSaltSp1Ex2.setFont(new Font("Arial", Font.BOLD, 16));
+        desincriptarSaltSp1Ex2.setBackground(new Color(135, 206, 250));
+        desincriptarSaltSp1Ex2.setFocusPainted(false);
+        //desincriptarSaltSp1Ex2.setIcon(new ImageIcon("path/to/salt_icon.png"));
+        desincriptarSaltSp1Ex2.setHorizontalTextPosition(SwingConstants.RIGHT);
+        panel.add(desincriptarSaltSp1Ex2);
 
-        desincriptarSaltPepper = new JButton("Desincriptar Salt e Pepper");
-        desincriptarSaltPepper.setFont(new Font("Arial", Font.BOLD, 16));
-        desincriptarSaltPepper.setBackground(new Color(135, 206, 250));
-        desincriptarSaltPepper.setFocusPainted(false);
-        desincriptarSaltPepper.setIcon(new ImageIcon("path/to/salt_icon.png"));
-        desincriptarSaltPepper.setHorizontalTextPosition(SwingConstants.RIGHT);
-        panel.add(desincriptarSaltPepper);
+
+        desincriptarCOCSalt = new JButton("Sprint 1 - EX 2 - Desincriptar CDC + Salt");
+        desincriptarCOCSalt.setFont(new Font("Arial", Font.BOLD, 16));
+        desincriptarCOCSalt.setBackground(new Color(135, 206, 250));
+        desincriptarCOCSalt.setFocusPainted(false);
+        //desincriptarCOCSalt.setIcon(new ImageIcon("path/to/salt_icon.png"));
+        desincriptarCOCSalt.setHorizontalTextPosition(SwingConstants.RIGHT);
+        panel.add(desincriptarCOCSalt);
+
+        desincriptarSaltSp2Ex1 = new JButton("Sprint 2 - EX 1 - Desincriptar Apenas SALT");
+        desincriptarSaltSp2Ex1.setFont(new Font("Arial", Font.BOLD, 16));
+        desincriptarSaltSp2Ex1.setBackground(new Color(135, 206, 250));
+        desincriptarSaltSp2Ex1.setFocusPainted(false);
+        //desincriptarSaltSp2Ex1.setIcon(new ImageIcon("path/to/salt_icon.png"));
+        desincriptarSaltSp2Ex1.setHorizontalTextPosition(SwingConstants.RIGHT);
+        panel.add(desincriptarSaltSp2Ex1);
+
+        desincriptarPepperSp2Ex1 = new JButton("Sprint 2 - EX 1 - Desincriptar Apenas Pepper");
+        desincriptarPepperSp2Ex1.setFont(new Font("Arial", Font.BOLD, 16));
+        desincriptarPepperSp2Ex1.setBackground(new Color(135, 206, 250));
+        desincriptarPepperSp2Ex1.setFocusPainted(false);
+        //desincriptarPepperSp2Ex1.setIcon(new ImageIcon("path/to/salt_icon.png"));
+        desincriptarPepperSp2Ex1.setHorizontalTextPosition(SwingConstants.RIGHT);
+        panel.add(desincriptarPepperSp2Ex1);
+
+        desincriptarAlfaSubsSp2Ex1 = new JButton("Sprint 2 - EX 1 - Desincriptar Apenas Alfabeto Substituição");
+        desincriptarAlfaSubsSp2Ex1.setFont(new Font("Arial", Font.BOLD, 16));
+        desincriptarAlfaSubsSp2Ex1.setBackground(new Color(135, 206, 250));
+        desincriptarAlfaSubsSp2Ex1.setFocusPainted(false);
+        //desincriptarAlfaSubsSp2Ex1.setIcon(new ImageIcon("path/to/salt_icon.png"));
+        desincriptarAlfaSubsSp2Ex1.setHorizontalTextPosition(SwingConstants.RIGHT);
+        panel.add(desincriptarAlfaSubsSp2Ex1);
 
         desincriptarCesar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ViewDecript();
+                new ViewDecriptCipherOfCaesar();
                 frame.dispose(); // Fecha o menu atual
             }
         });
 
-        desincriptarSalt.addActionListener(new ActionListener() {
+        desincriptarSaltSp1Ex2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ViewDecriptComSalt();
+                new ViewDecriptSaltSp1Ex2();
                 frame.dispose();
             }
         });
 
-        desincriptarSaltPepper.addActionListener(new ActionListener() {
+        desincriptarCOCSalt.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ViewDecriptComSaltPepper();
+                new ViewDecriptCOCSaltSp1Ex2();
+                frame.dispose();
+            }
+        });
+
+        desincriptarSaltSp2Ex1.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ViewDecriptSaltSp2Ex1();
+                frame.dispose();
+            }
+        });
+
+        desincriptarPepperSp2Ex1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ViewDecriptPepperSp2Ex1();
+                frame.dispose();
+            }
+        });
+
+        desincriptarAlfaSubsSp2Ex1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ViewDecriptAlfabSubsSp2Ex1();
                 frame.dispose();
             }
         });

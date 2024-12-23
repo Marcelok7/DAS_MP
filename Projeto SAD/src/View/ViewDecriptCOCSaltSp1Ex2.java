@@ -1,22 +1,21 @@
 package View;
 
 import Utils.TheMasterDecryptor;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class ViewDecriptComSaltPepper {
+public class ViewDecriptCOCSaltSp1Ex2 {
     private JTextField textField1;
     private JButton button1;
-    private JButton backButton;
+    private JButton backButton; // Botão para voltar ao menu
     private JTextArea textArea1;
 
-    public ViewDecriptComSaltPepper() {
+    public ViewDecriptCOCSaltSp1Ex2() {
         // Configuração do JFrame
-        JFrame frame = new JFrame("Desincriptar Salt e Pepper");
+        JFrame frame = new JFrame("Exercicio 2 - Desincriptar CDC + Salt");
         frame.setSize(550, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -50,45 +49,71 @@ public class ViewDecriptComSaltPepper {
 
         // Configuração do JTextArea (área para mostrar o resultado)
         textArea1 = new JTextArea();
-        textArea1.setBounds(20, 60, 500, 600);
         textArea1.setEditable(false); // Impede a edição direta pelo usuário
         textArea1.setFont(new Font("Arial", Font.PLAIN, 14)); // Fonte do JTextArea
         textArea1.setBackground(Color.WHITE); // Cor de fundo do JTextArea
         textArea1.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Borda do JTextArea
-        panel.add(textArea1);
 
-        // Ação para o botão "Desincriptar Salt e Pepper"
+        // Adiciona um JScrollPane para permitir a rolagem
+        JScrollPane scrollPane = new JScrollPane(textArea1);
+        scrollPane.setBounds(20, 60, 500, 600); // Define o tamanho e a posição do JScrollPane
+        panel.add(scrollPane);
+
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Capturar o texto inserido no JTextField
-                String inputText = textField1.getText().toUpperCase();
+                String textoCifrado = textField1.getText().toUpperCase();
+                StringBuilder resultado = new StringBuilder();
 
-                // Usar a classe TheMasterDecryptor para descriptografar
-                List<String> resultados = TheMasterDecryptor.desencriptarMensagem(inputText);
+                // Verifica se o campo de texto está vazio
+                if (textoCifrado.isEmpty()) {
+                    resultado.append("Insira um texto para cifrar.");
+                } else {
 
-                // Construir o texto para exibição no JTextArea
-                StringBuilder resultadoTexto = new StringBuilder();
-                for (String resultado : resultados) {
-                    resultadoTexto.append(resultado).append("\n");
+                    //Salt
+                    List<String> mensagensSemSalt = TheMasterDecryptor.desencriptarSaltSp1Ex2(textoCifrado);
+
+                    for(int i = 0; i < mensagensSemSalt.size(); i++){
+
+                        String mensagemSemSalt = mensagensSemSalt.get(i);
+
+                        String posicaoSalt = null;
+
+                        if(i == 0) {
+                            posicaoSalt = "===== SALT Remoção Inicio =====";
+                        }
+                        else{
+                            posicaoSalt = "===== SALT Remoção Fim  =====";
+                        }
+
+                        resultado.append(posicaoSalt).append(mensagemSemSalt).append("\n");
+
+                        // Tenta todas as chaves de 1 a 25
+                        for (int j = 1; j <= 25; j++) {
+                            String textoDescriptografado = TheMasterDecryptor.descriptografarCifraCesar(mensagemSemSalt, j);
+                            resultado.append("Deslocamento ").append(j).append(": ").append(textoDescriptografado).append("\n");
+                        }
+                    }
                 }
 
-                // Exibir os resultados no JTextArea
-                textArea1.setText(resultadoTexto.toString());
+                textArea1.setText(resultado.toString());
+                //textArea1.setBounds(20, 60, 500, textArea1.getPreferredSize().height);
+                //textArea1.setPreferredSize(new Dimension(500, textArea1.getPreferredSize().height));
             }
         });
 
-        // Ação para o botão "Voltar para o Menu"
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 frame.dispose();
                 new Menu();
             }
         });
 
-        // Adicionar o painel ao frame
-        frame.add(panel, BorderLayout.CENTER);
+
+        frame.add(panel);
         frame.setVisible(true);
     }
 }

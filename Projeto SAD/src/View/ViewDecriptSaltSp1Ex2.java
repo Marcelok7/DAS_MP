@@ -1,21 +1,23 @@
 package View;
 
 import Utils.TheMasterDecryptor;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
-public class ViewDecript {
+public class ViewDecriptSaltSp1Ex2 {
     private JTextField textField1;
     private JButton button1;
-    private JButton backButton; // Botão para voltar ao menu
+    private JButton backButton;
     private JTextArea textArea1;
     private TheMasterDecryptor theMasterDecryptor = new TheMasterDecryptor();
 
-    public ViewDecript() {
+    public ViewDecriptSaltSp1Ex2() {
         // Configuração do JFrame
-        JFrame frame = new JFrame("Desincriptar o amigo César");
+        JFrame frame = new JFrame("Desincriptar o amigo César com Salt");
         frame.setSize(550, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -60,21 +62,14 @@ public class ViewDecript {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String textoCifrado = textField1.getText().toUpperCase();
-                StringBuilder resultado = new StringBuilder();
+                String mensagemCifrada = textField1.getText().toUpperCase();
+                List<String> resultados = TheMasterDecryptor.desencriptarSaltSp1Ex2(mensagemCifrada);
 
-                // Verifica se o campo de texto está vazio
-                if (textoCifrado.isEmpty()) {
-                    resultado.append("Insira um texto para cifrar.");
-                } else {
-                    // Tenta todas as chaves de 1 a 25
-                    for (int i = 1; i <= 25; i++) {
-                        String textoDescriptografado = theMasterDecryptor.descriptografarCifraCesar(textoCifrado, i);
-                        resultado.append("Deslocamento ").append(i).append(": ").append(textoDescriptografado).append("\n");
-                    }
+                StringBuilder resultadoText = new StringBuilder();
+                for (String resultado : resultados) {
+                    resultadoText.append(resultado).append("\n");
                 }
-
-                textArea1.setText(resultado.toString());
+                textArea1.setText(resultadoText.toString());
             }
         });
 
@@ -82,7 +77,6 @@ public class ViewDecript {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 frame.dispose();
                 new Menu();
             }

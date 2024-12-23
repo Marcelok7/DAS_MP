@@ -8,16 +8,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class ViewDecriptComSalt {
+public class ViewDecriptPepperSp2Ex1 {
     private JTextField textField1;
     private JButton button1;
     private JButton backButton;
     private JTextArea textArea1;
-    private TheMasterDecryptor theMasterDecryptor = new TheMasterDecryptor();
 
-    public ViewDecriptComSalt() {
+    public ViewDecriptPepperSp2Ex1() {
         // Configuração do JFrame
-        JFrame frame = new JFrame("Desincriptar o amigo César com Salt");
+        JFrame frame = new JFrame("Sprint 2 - EX 1 - Desincriptar Apenas Pepper");
         frame.setSize(550, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -58,22 +57,28 @@ public class ViewDecriptComSalt {
         textArea1.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Borda do JTextArea
         panel.add(textArea1);
 
-
+        // Ação para o botão "Desincriptar Salt e Pepper"
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String mensagemCifrada = textField1.getText().toUpperCase();
-                List<String> resultados = TheMasterDecryptor.desencriptarSalt(mensagemCifrada);
+                // Capturar o texto inserido no JTextField
+                String inputText = textField1.getText().toUpperCase();
 
-                StringBuilder resultadoText = new StringBuilder();
+                // Usar a classe TheMasterDecryptor para descriptografar
+                List<String> resultados = TheMasterDecryptor.desencriptarPeperSp2Ex1(inputText);
+
+                // Construir o texto para exibição no JTextArea
+                StringBuilder resultadoTexto = new StringBuilder();
                 for (String resultado : resultados) {
-                    resultadoText.append(resultado).append("\n");
+                    resultadoTexto.append(resultado).append("\n");
                 }
-                textArea1.setText(resultadoText.toString());
+
+                // Exibir os resultados no JTextArea
+                textArea1.setText(resultadoTexto.toString());
             }
         });
 
-
+        // Ação para o botão "Voltar para o Menu"
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -82,8 +87,8 @@ public class ViewDecriptComSalt {
             }
         });
 
-
-        frame.add(panel);
+        // Adicionar o painel ao frame
+        frame.add(panel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 }
