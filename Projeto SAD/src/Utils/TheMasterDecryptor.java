@@ -198,9 +198,6 @@ import java.util.*;
 
 public class TheMasterDecryptor {
 
-    private static final String PORTUGUESE_ALPHABET = "AEOISRNTULCDMPVGHQBFZJXKWY";
-    private static final String MESSAGE_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
     //CIFRA DE CÉSAR - 1º Sprint - Exercício 1
     public static String descriptografarCifraCesar(String texto, int deslocamento) {
         StringBuilder textoDescriptografado = new StringBuilder();
@@ -219,11 +216,12 @@ public class TheMasterDecryptor {
     //SALT - 1º Sprint - Exercício 2
     public static List<String> desencriptarSaltSp1Ex2(String mensagem) {
 
+        //3 letras, seja minuscula ou maiscula
         final String SALT_PATTERN = "[a-zA-Z]{3}";
 
         List<String> mensagensPossiveis = new ArrayList<>();
 
-        // SALT no início
+        //Verifica SALT no início
         if (mensagem.length() > 3 && mensagem.substring(0, 3).matches(SALT_PATTERN)) {
             mensagensPossiveis.add(mensagem.substring(3));
         }
@@ -233,7 +231,7 @@ public class TheMasterDecryptor {
             mensagensPossiveis.add(mensagem.substring(0, mensagem.length() - 3));
         }
 
-        // Caso nenhum SALT seja encontrado
+        // Caso nenhum SALT seja encontrado, retorna mensagem original
         if (mensagensPossiveis.isEmpty()) {
             mensagensPossiveis.add(mensagem);
         }
@@ -244,12 +242,12 @@ public class TheMasterDecryptor {
     //SALT - 2º Sprint - Exercício 1
     public static List<String> desencriptarSalt2SPEx1(String mensagem) {
 
-        // SALT com caracteres especiais e comprimento máximo de 4
+        //SALT com estes caracteres especiais e comprimento de 1 a 4
         final String SALT_PATTERN = "[!#$%&+\\-<=>@]{1,4}";
 
         List<String> mensagensPossiveis = new ArrayList<>();
 
-        // SALT no início
+        //Verificar SALT no início
         if (mensagem.length() > 4 && mensagem.substring(0, 4).matches(SALT_PATTERN)) {
             mensagensPossiveis.add(mensagem.substring(4));
         }
@@ -263,7 +261,7 @@ public class TheMasterDecryptor {
             mensagensPossiveis.add(mensagem.substring(1));
         }
 
-        // SALT no final
+        //Verificar SALT no final
         if (mensagem.length() > 4 && mensagem.substring(mensagem.length() - 4).matches(SALT_PATTERN)) {
             mensagensPossiveis.add(mensagem.substring(0, mensagem.length() - 4));
         }
@@ -277,7 +275,7 @@ public class TheMasterDecryptor {
             mensagensPossiveis.add(mensagem.substring(0, mensagem.length() - 1));
         }
 
-        // Caso nenhum SALT seja encontrado
+        //Caso nenhum SALT seja encontrado, é apresentada a mensagem original
         if (mensagensPossiveis.isEmpty()) {
             mensagensPossiveis.add(mensagem);
         }
@@ -301,6 +299,7 @@ public class TheMasterDecryptor {
             mensagensPossiveis.add(mensagem.substring(1));
         }
 
+        /*
         // Peper no final
         if (mensagem.length() > 2 && mensagem.substring(mensagem.length() - 2).matches(PEPER_PATTERN)) {
             mensagensPossiveis.add(mensagem.substring(0, mensagem.length() - 2));
@@ -308,8 +307,9 @@ public class TheMasterDecryptor {
         if (mensagem.length() > 1 && mensagem.substring(mensagem.length() - 1).matches(PEPER_PATTERN)) {
             mensagensPossiveis.add(mensagem.substring(0, mensagem.length() - 1));
         }
+        */
 
-        // Caso nenhum peper seja encontrado
+        //Caso nenhum peper seja encontrado, é apresentada a mensagem original
         if (mensagensPossiveis.isEmpty()) {
             mensagensPossiveis.add(mensagem);
         }
@@ -317,46 +317,30 @@ public class TheMasterDecryptor {
         return mensagensPossiveis;
     }
 
-    //Alfabeto Substituição - 2ª Sprint - Exercício 1
-    public static String desencriptarAlfabetoSubstituicao(String mensagemCriptografada) {
+    //Decifra uma palavra, de acordo com o alfabeto de substituitção usado (Só funciona com palavras portuguesas)
+    public static String aplicarAlfabetoSubstituicao(String palavraADecifrarString, String alfabetoDeSubstituicaoString) {
 
-        // Frequência relativa das letras mais comuns em português (base no gráfico)
-        char[] frequenciaPortugues = {'A', 'E', 'O', 'S', 'R', 'I', 'N', 'D', 'M', 'U', 'T', 'C', 'L', 'P', 'V', 'G', 'H', 'Q', 'B', 'F', 'Z', 'J', 'X', 'K', 'W', 'Y'};
+        String alfabetoOriginalString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-        // Frequência das letras no texto criptografado
-        Map<Character, Integer> frequenciaTexto = new HashMap<>();
+        char[] alfabetoOriginal     = alfabetoOriginalString.toCharArray();
+        char[] alfabetoSubstituicao = alfabetoDeSubstituicaoString.toUpperCase().toCharArray();
 
-        // Contar frequência das letras na mensagem criptografada
-        for (char c : mensagemCriptografada.toUpperCase().toCharArray()) {
-            if (Character.isLetter(c)) {
-                frequenciaTexto.put(c, frequenciaTexto.getOrDefault(c, 0) + 1);
+        char[] palavraADecifrar = palavraADecifrarString.toCharArray();
+
+        StringBuilder palavraDecifrada = new StringBuilder();
+
+        for(int i = 0; i < palavraADecifrar.length; i++){
+
+            char currentLetter = palavraADecifrar[i];
+
+            for (int j = 0; j < alfabetoSubstituicao.length; j++){
+                if(alfabetoSubstituicao[j] == currentLetter){
+                    palavraDecifrada.append(alfabetoOriginal[j]);
+                }
             }
         }
 
-        // Ordenar as letras criptografadas por frequência em ordem decrescente
-        char[] letrasCriptografadasOrdenadas = frequenciaTexto.keySet().stream()
-                .sorted((a, b) -> frequenciaTexto.get(b) - frequenciaTexto.get(a))
-                .map(Object::toString)
-                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
-                .toString().toCharArray();
-
-        // Criar o mapeamento entre as letras criptografadas e as letras mais frequentes em português
-        Map<Character, Character> mapaSubstituicao = new HashMap<>();
-        for (int i = 0; i < letrasCriptografadasOrdenadas.length && i < frequenciaPortugues.length; i++) {
-            mapaSubstituicao.put(letrasCriptografadasOrdenadas[i], frequenciaPortugues[i]);
-        }
-
-        // Substituir as letras na mensagem criptografada com base no mapeamento
-        StringBuilder mensagemDesencriptada = new StringBuilder();
-        for (char c : mensagemCriptografada.toUpperCase().toCharArray()) {
-            if (mapaSubstituicao.containsKey(c)) {
-                mensagemDesencriptada.append(mapaSubstituicao.get(c));
-            } else {
-                mensagemDesencriptada.append(c); // Manter caracteres que não são letras
-            }
-        }
-
-        return mensagemDesencriptada.toString();
+        return palavraDecifrada.toString();
     }
 
     // Método principal para desencriptar mensagens

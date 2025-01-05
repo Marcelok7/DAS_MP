@@ -31,7 +31,6 @@ public class Menu {
         desincriptarCesar.setFont(new Font("Arial", Font.BOLD, 16));
         desincriptarCesar.setBackground(new Color(135, 206, 250));
         desincriptarCesar.setFocusPainted(false);
-        //desincriptarCesar.setIcon(new ImageIcon("path/to/cesar_icon.png"));
         desincriptarCesar.setHorizontalTextPosition(SwingConstants.RIGHT);
         panel.add(desincriptarCesar);
 
@@ -39,7 +38,6 @@ public class Menu {
         desincriptarSaltSp1Ex2.setFont(new Font("Arial", Font.BOLD, 16));
         desincriptarSaltSp1Ex2.setBackground(new Color(135, 206, 250));
         desincriptarSaltSp1Ex2.setFocusPainted(false);
-        //desincriptarSaltSp1Ex2.setIcon(new ImageIcon("path/to/salt_icon.png"));
         desincriptarSaltSp1Ex2.setHorizontalTextPosition(SwingConstants.RIGHT);
         panel.add(desincriptarSaltSp1Ex2);
 
@@ -48,7 +46,6 @@ public class Menu {
         desincriptarCOCSalt.setFont(new Font("Arial", Font.BOLD, 16));
         desincriptarCOCSalt.setBackground(new Color(135, 206, 250));
         desincriptarCOCSalt.setFocusPainted(false);
-        //desincriptarCOCSalt.setIcon(new ImageIcon("path/to/salt_icon.png"));
         desincriptarCOCSalt.setHorizontalTextPosition(SwingConstants.RIGHT);
         panel.add(desincriptarCOCSalt);
 
@@ -56,7 +53,6 @@ public class Menu {
         desincriptarSaltSp2Ex1.setFont(new Font("Arial", Font.BOLD, 16));
         desincriptarSaltSp2Ex1.setBackground(new Color(135, 206, 250));
         desincriptarSaltSp2Ex1.setFocusPainted(false);
-        //desincriptarSaltSp2Ex1.setIcon(new ImageIcon("path/to/salt_icon.png"));
         desincriptarSaltSp2Ex1.setHorizontalTextPosition(SwingConstants.RIGHT);
         panel.add(desincriptarSaltSp2Ex1);
 
@@ -64,7 +60,6 @@ public class Menu {
         desincriptarPepperSp2Ex1.setFont(new Font("Arial", Font.BOLD, 16));
         desincriptarPepperSp2Ex1.setBackground(new Color(135, 206, 250));
         desincriptarPepperSp2Ex1.setFocusPainted(false);
-        //desincriptarPepperSp2Ex1.setIcon(new ImageIcon("path/to/salt_icon.png"));
         desincriptarPepperSp2Ex1.setHorizontalTextPosition(SwingConstants.RIGHT);
         panel.add(desincriptarPepperSp2Ex1);
 
@@ -72,7 +67,6 @@ public class Menu {
         desincriptarAlfaSubsSp2Ex1.setFont(new Font("Arial", Font.BOLD, 16));
         desincriptarAlfaSubsSp2Ex1.setBackground(new Color(135, 206, 250));
         desincriptarAlfaSubsSp2Ex1.setFocusPainted(false);
-        //desincriptarAlfaSubsSp2Ex1.setIcon(new ImageIcon("path/to/salt_icon.png"));
         desincriptarAlfaSubsSp2Ex1.setHorizontalTextPosition(SwingConstants.RIGHT);
         panel.add(desincriptarAlfaSubsSp2Ex1);
 
@@ -80,7 +74,7 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ViewDecriptCipherOfCaesar();
-                frame.dispose(); // Fecha o menu atual
+                frame.dispose();
             }
         });
 

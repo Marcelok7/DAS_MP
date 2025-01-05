@@ -9,29 +9,27 @@ import java.awt.event.ActionListener;
 public class ViewDecriptCipherOfCaesar {
     private JTextField textField1;
     private JButton button1;
-    private JButton backButton; // Botão para voltar ao menu
+    private JButton backButton;
     private JTextArea textArea1;
     private TheMasterDecryptor theMasterDecryptor = new TheMasterDecryptor();
 
     public ViewDecriptCipherOfCaesar() {
-        // Configuração do JFrame
+
         JFrame frame = new JFrame("EX 1 - Desincriptar Cifra De César");
         frame.setSize(550, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        // Configuração do painel principal
+
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBackground(new Color(240, 240, 240)); // Cor de fundo do painel
 
-        // Configuração do JTextField (entrada de texto)
         textField1 = new JTextField();
         textField1.setBounds(20, 20, 340, 30);
         textField1.setFont(new Font("Arial", Font.PLAIN, 14)); // Fonte do JTextField
         panel.add(textField1);
 
-        // Configuração do JButton (botão de descriptografar)
         button1 = new JButton("Desincriptar");
         button1.setBounds(370, 20, 150, 30);
         button1.setFont(new Font("Arial", Font.BOLD, 14)); // Fonte do botão
@@ -39,7 +37,6 @@ public class ViewDecriptCipherOfCaesar {
         button1.setFocusPainted(false); // Remove o foco do botão
         panel.add(button1);
 
-        // Configuração do JButton (botão para voltar ao menu)
         backButton = new JButton("Voltar para o Menu");
         backButton.setBounds(20, 670, 200, 30);
         backButton.setFont(new Font("Arial", Font.BOLD, 14)); // Fonte do botão
@@ -47,7 +44,6 @@ public class ViewDecriptCipherOfCaesar {
         backButton.setFocusPainted(false); // Remove o foco do botão
         panel.add(backButton);
 
-        // Configuração do JTextArea (área para mostrar o resultado)
         textArea1 = new JTextArea();
         textArea1.setBounds(20, 60, 500, 600);
         textArea1.setEditable(false); // Impede a edição direta pelo usuário
@@ -56,18 +52,15 @@ public class ViewDecriptCipherOfCaesar {
         textArea1.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Borda do JTextArea
         panel.add(textArea1);
 
-
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String textoCifrado = textField1.getText().toUpperCase();
                 StringBuilder resultado = new StringBuilder();
 
-                // Verifica se o campo de texto está vazio
                 if (textoCifrado.isEmpty()) {
                     resultado.append("Insira um texto para cifrar.");
                 } else {
-                    // Tenta todas as chaves de 1 a 25
                     for (int i = 1; i <= 25; i++) {
                         String textoDescriptografado = theMasterDecryptor.descriptografarCifraCesar(textoCifrado, i);
                         resultado.append("Deslocamento ").append(i).append(": ").append(textoDescriptografado).append("\n");
