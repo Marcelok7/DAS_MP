@@ -19,7 +19,7 @@ public class ViewDecriptCipherOfCaesar {
         frame.setSize(550, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         JPanel panel = new JPanel();
         panel.setLayout(null);

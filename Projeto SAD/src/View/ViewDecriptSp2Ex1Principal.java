@@ -6,8 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
-public class ViewDecriptAlfabSubsSp2Ex1 {
+public class ViewDecriptSp2Ex1Principal {
 
     private JLabel jLabel1;
     private JLabel jLabel2;
@@ -17,59 +18,80 @@ public class ViewDecriptAlfabSubsSp2Ex1 {
     private JButton backButton;
     private JTextArea textArea1;
 
-    public ViewDecriptAlfabSubsSp2Ex1() {
+    public ViewDecriptSp2Ex1Principal() {
 
-        JFrame frame = new JFrame("Sprint 2 - EX 1 - Desincriptar Apenas Alfabeto Substituição");
+        JFrame frame = new JFrame("Sprint 2 - EX 1 - Desincriptação Final");
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         JPanel panel = new JPanel();
-        panel.setLayout(null);
         panel.setBackground(new Color(240, 240, 240));
 
         jLabel1 = new JLabel("Texto a Descodificar:");
-        jLabel1.setBounds(20, 10, 200, 20);
         jLabel1.setFont(new Font("Arial", Font.PLAIN, 14));
-        panel.add(jLabel1);
 
         textField1 = new JTextField();
-        textField1.setBounds(20, 40, 540, 30);
         textField1.setFont(new Font("Arial", Font.PLAIN, 14));
-        panel.add(textField1);
 
         jLabel2 = new JLabel("Alfabeto Substituição:");
-        jLabel2.setBounds(20, 80, 200, 20);
         jLabel2.setFont(new Font("Arial", Font.PLAIN, 14));
-        panel.add(jLabel2);
 
         textField2 = new JTextField();
-        textField2.setBounds(20, 110, 540, 30);
         textField2.setFont(new Font("Arial", Font.PLAIN, 14));
-        panel.add(textField2);
 
         button1 = new JButton("Desincriptar");
-        button1.setBounds(380, 160, 180, 30);
         button1.setFont(new Font("Arial", Font.BOLD, 14));
         button1.setBackground(new Color(135, 206, 250));
         button1.setFocusPainted(false);
-        panel.add(button1);
 
         backButton = new JButton("Voltar para o Menu");
-        backButton.setBounds(20, 700, 200, 30);
         backButton.setFont(new Font("Arial", Font.BOLD, 14));
         backButton.setBackground(new Color(255, 99, 71));
         backButton.setFocusPainted(false);
-        panel.add(backButton);
 
         textArea1 = new JTextArea();
-        textArea1.setBounds(20, 210, 540, 470);
         textArea1.setEditable(false);
         textArea1.setFont(new Font("Arial", Font.PLAIN, 14));
         textArea1.setBackground(Color.WHITE);
         textArea1.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        panel.add(textArea1);
+
+        JScrollPane scrollPane = new JScrollPane(textArea1);
+
+        GroupLayout layout = new GroupLayout(panel);
+        panel.setLayout(layout);
+
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addComponent(textField1)
+                        .addComponent(jLabel2)
+                        .addComponent(textField2)
+                        .addGroup(
+                                layout.createSequentialGroup()
+                                        .addGap(200, 200, Integer.MAX_VALUE)
+                                        .addComponent(button1, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
+                        )
+                        .addComponent(scrollPane)
+                        .addComponent(backButton, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+        );
+
+        layout.setVerticalGroup(
+                layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addComponent(textField1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(textField2, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                        .addGap(10)
+                        .addComponent(button1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                        .addGap(20)
+                        .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 400, Integer.MAX_VALUE)
+                        .addGap(10)
+                        .addComponent(backButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        );
 
         button1.addActionListener(new ActionListener() {
             @Override
@@ -81,10 +103,17 @@ public class ViewDecriptAlfabSubsSp2Ex1 {
 
                 if (!inputText2.isEmpty() && numberOfLetters == 26) {
 
-                    String inputText = textField1.getText().toUpperCase();
-                    String resultadoTexto = TheMasterDecryptor.aplicarAlfabetoSubstituicao(inputText, inputText2);
+                    StringBuilder resultado = new StringBuilder();
 
-                    textArea1.setText(resultadoTexto);
+                    String inputText = textField1.getText();
+
+                    List<String> mensagensPossiveis = TheMasterDecryptor.desencriptarMensagem(inputText, inputText2);
+
+                    for (int i = 0; i < mensagensPossiveis.size(); i++) {
+                        resultado.append(i).append(" - ").append(mensagensPossiveis.get(i)).append("\n");
+                    }
+
+                    textArea1.setText(resultado.toString());
                 } else {
                     JOptionPane.showMessageDialog(
                             null,
@@ -104,7 +133,7 @@ public class ViewDecriptAlfabSubsSp2Ex1 {
             }
         });
 
-        frame.add(panel, BorderLayout.CENTER);
+        frame.add(panel);
         frame.setVisible(true);
     }
 }

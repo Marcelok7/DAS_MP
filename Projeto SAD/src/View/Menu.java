@@ -13,6 +13,7 @@ public class Menu {
     private JButton desincriptarSaltSp2Ex1;
     private JButton desincriptarPepperSp2Ex1;
     private JButton desincriptarAlfaSubsSp2Ex1;
+    private JButton desencriptarPrincipalSp2Ex1;
 
     private JPanel panel;
 
@@ -22,6 +23,7 @@ public class Menu {
         frame.setSize(520, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         panel = new JPanel();
         panel.setLayout(new GridLayout(3, 1, 10, 10)); // Mudado para 3 linhas
@@ -70,6 +72,13 @@ public class Menu {
         desincriptarAlfaSubsSp2Ex1.setHorizontalTextPosition(SwingConstants.RIGHT);
         panel.add(desincriptarAlfaSubsSp2Ex1);
 
+        desencriptarPrincipalSp2Ex1 = new JButton("Sprint 2 - EX 1 - Exercicío Principal");
+        desencriptarPrincipalSp2Ex1.setFont(new Font("Arial", Font.BOLD, 16));
+        desencriptarPrincipalSp2Ex1.setBackground(new Color(135, 206, 250));
+        desencriptarPrincipalSp2Ex1.setFocusPainted(false);
+        desencriptarPrincipalSp2Ex1.setHorizontalTextPosition(SwingConstants.RIGHT);
+        panel.add(desencriptarPrincipalSp2Ex1);
+
         desincriptarCesar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -114,6 +123,14 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ViewDecriptAlfabSubsSp2Ex1();
+                frame.dispose();
+            }
+        });
+
+        desencriptarPrincipalSp2Ex1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ViewDecriptSp2Ex1Principal();
                 frame.dispose();
             }
         });

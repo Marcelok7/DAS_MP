@@ -20,6 +20,7 @@ public class ViewDecriptPepperSp2Ex1 {
         frame.setSize(550, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
